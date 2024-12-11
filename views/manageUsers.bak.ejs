@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=title%>
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link rel="stylesheet" href="/stylesheets/sign-form.css">
+  <script defer src="/javascripts/forms/manageUsersHandler.js"></script> <!-- 引用管理員腳本 -->
+
+  <style>
+    #sign-block>p {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <%- include('_header.ejs') %>
+      <main>
+        <section>
+          <h2>Manage Users</h2>
+          <ul id="userList">
+            <% users.forEach(function(user) { %>
+              <li id="user-<%= user._id %>">
+                <h3><%= user.username %></h3>
+                <p>Email: <%= user.email %></p>
+                <p class="activation-status">Status: <%= user.isActivated ? 'Active' : 'Deactivated' %></p>
+                <p class="role-status">Role: <%= user.role %></p>
+                <button class="activate-user" data-id="<%= user._id %>" <%=user.isActivated ? 'disabled' : ''%>>Activate</button>
+                <button class="deactivate-user" data-id="<%= user._id %>" <%=user.isActivated ? '' : 'disabled'%>>Deactivate</button>
+                <select class="change-role" data-id="<%= user._id %>">
+                  <option value="User" <%=user.role==='User' ? 'selected' : '' %>>User</option>
+                  <option value="Admin" <%=user.role==='Admin' ? 'selected' : '' %>>Admin</option>
+                  <option value="Super Admin" <%=user.role==='Super Admin' ? 'selected' : '' %>>Super Admin</option>
+                </select>
+                <article class="message" style="display: inline;"></article>
+              </li>
+              <% }) %>
+          </ul>
+        </section>
+      </main>
+      <%- include('_footer.ejs') %>
+  </div>
+</body>
+
+</html>

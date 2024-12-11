@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=title%>
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="<%=baseUrl%>/stylesheets/styles.css">
+  <link rel="stylesheet" href="<%=baseUrl%>/stylesheets/sign-form.css">
+  <style>
+    .center {
+      height: 78vh;
+      position: relative;
+      background-image: url('/images/lost.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      color: whitesmoke;
+      font-size: xx-large;
+    }
+
+    .center a {
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    .center a {
+      color: whitesmoke;
+    }
+    .center a:visited {
+      color: whitesmoke;
+    }
+    .center a:hover {
+      color: whitesmoke;/
+    }
+    .center a:active {
+      color: whitesmoke;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <%- include('_header.ejs') %>
+      <main>
+        <section>
+          <div class="center">
+            <a href="/">
+              <h3>404 - Page Not Found</h3>
+            <p>Sorry, the page you are looking for does not exist.</p>
+              Go to Home</a>
+          </div>
+        </section>
+      </main>
+      <%- include('_footer.ejs') %>
+  </div>
+</body>
+
+</html>

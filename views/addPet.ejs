@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=title%>
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link rel="stylesheet" href="/stylesheets/sign-form.css">
+  <script defer src="/javascripts/forms/addPetFormHandler.js"></script>
+
+  <style>
+    #sign-block {
+      margin-top: 4vh;
+      margin-bottom: 10vh;
+    }
+
+    #description {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <%- include('_header.ejs') %>
+      <main>
+        <div id="sign-block">
+
+          <h1>Add a New Pet</h1>
+          <form id="petForm" enctype="multipart/form-data">
+            <div>
+              <label for="name">Pet Name:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+              <label for="petType">Pet Type:
+                <select id="petType" name="petType" required>
+                  <option value="cat">Cat</option>
+                  <option value="dog">Dog</option>
+                  <option value="rabbit">Rabbit</option>
+                  <option value="parrot">Parrot</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label for="petAge">Pet Age:
+                <input type="number" id="petAge" name="petAge" min="0" max="100" step="0.25" value="0" required>
+              </label>
+            </div>
+            <div>
+              <label for="description">Description:</label>
+              <textarea id="description" name="description" maxlength="500" rows="4"></textarea>
+            </div>
+            <div>
+              <label for="petImage">Upload Image:</label>
+              <input type="file" id="petImage" name="petImage" accept="image/*" required>
+            </div>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+            <p id="message"></p> <!-- 消息元素 -->
+          </form>
+
+        </div>
+      </main>
+      <%- include('_footer.ejs') %>
+  </div>
+</body>
+
+</html>

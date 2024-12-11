@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=title%> 
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="<%=baseUrl%>/stylesheets/styles.css">
+  <link rel="stylesheet" href="<%=baseUrl%>/stylesheets/card.css">
+  <style>
+.pagination-wrapper {
+  text-align: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-top: 0;
+  position: relative;
+}
+
+.pagination {
+  display: inline-flex;
+  justify-content: center;
+  padding: 1em;
+  flex-wrap: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+.pagination ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  color: #28a745; /* 綠色系 */
+  border-radius: 4px;
+}
+
+.pagination a:hover {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.pagination a.active {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <%- include('./_header.ejs') %>
+      <main>
+        <section>
+        
+        <% if (pets.length > 0) { %>
+
+          <div class="pagination-wrapper">
+            <nav class="pagination">
+              <ul>
+                <li><a href="/pets/1/<%=petType%>">First</a></li>
+                <li><a href="/pets/<%=pageInfo.prevPage%>">Previous</a></li>
+                <% for(let i=pageInfo.leftEdge; i <=pageInfo.rightEdge; i++) { %>
+                  <li><a href="/pets/<%=i%>/<%=petType%>" <%=pageInfo.currentPage == i ? 'class=active' : ''%>>
+                      <%=i%>
+                    </a></li>
+                  <% } %>
+                    <li><a href="/pets/<%=pageInfo.nextPage%>/<%=petType%>">Next</a></li>
+                    <li><a href="/pets/<%=pageInfo.totalPages%>/<%=petType%>">Last</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <ul class="card-list">
+            <% pets.forEach(function(pet) { %>
+
+              <li class="card-item">
+                <div class="card-item-inner">
+
+                  <div class="card-image-outer">
+                    <% if (pet.image) { %>
+                      <a href="/uploads/pets/originals/<%= pet.image %>">
+                        <img class="card-img" src="/uploads/pets/originals/<%= pet.image %>" alt="<%= pet.name %>">
+                      </a>
+                      <% } %>
+                  </div>
+                  <div class="card-content">
+                    <div class="card-title">
+                      Name: <%= pet.name %><br>
+                      Age: <%= pet.petAge %> years
+                    </div>
+                    <p class="card-paragraph ">
+                      <%= pet.description %>
+                    </p>
+                    <button class="card-button">
+                      <a href="/users/1/<%=pet.ownerId%>">Contact me to take it</a>
+                    </button>
+                  </div>
+                </div>
+              </li>
+              <% }) %>
+          </ul>
+
+          <div class="pagination-wrapper">
+            <nav class="pagination">
+              <ul>
+                <li><a href="/pets/1/<%=petType%>">First</a></li>
+                <li><a href="/pets/<%=pageInfo.prevPage%>/<%=petType%>">Previous</a></li>
+                <% for(let i=pageInfo.leftEdge; i <=pageInfo.rightEdge; i++) { %>
+                  <li><a href="/pets/<%=i%>/<%=petType%>" <%=pageInfo.currentPage == i ? 'class=active' : ''%>>
+                      <%=i%>
+                    </a></li>
+                  <% } %>
+                    <li><a href="/pets/<%=pageInfo.nextPage%>/<%=petType%>">Next</a></li>
+                    <li><a href="/pets/<%=pageInfo.totalPages%>/<%=petType%>">Last</a></li>
+              </ul>
+            </nav>
+          </div>
+
+        <% } %>
+        </section>
+      </main>
+      <%- include('./_footer.ejs') %>
+  </div>
+</body>
+
+</html>

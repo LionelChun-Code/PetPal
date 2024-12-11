@@ -1,0 +1,147 @@
+  /* Fake Table Begin */
+  .fake-table {
+    display: table;
+    width: 100%;
+    border: 1px solid rgb(242, 242, 242);
+    border-collapse: collapse;
+  }
+
+  /* .header-row .header-cell {
+    background-color: rgb(255, 248, 234);
+  } */
+
+  .header-row,
+  .data-row {
+    display: table-row;
+    border: 1px solid lightgrey;
+  }
+
+  .data-row {
+    vertical-align: baseline;
+  }
+
+  .data-row:nth-of-type(even) {
+    background-color: rgb(242, 242, 242);
+  }
+
+  .data-row:nth-of-type(odd) {
+    background-color: white;
+  }
+
+  .header-cell,
+  .data-cell {
+    display: table-cell;
+    border: 1px solid rgb(242, 242, 242);
+    padding: 4px;
+    vertical-align: middle;
+  }
+
+  /* #hc1,
+  #hc2,
+  #hc3 {
+    width: 19.444%;
+  }
+
+  #hc4,
+  #hc5 {
+    width: 20.833%;
+  } */
+
+  .header-cell {
+    font-weight: bold;
+  }
+
+  .cell-header {
+    display: none;
+    visibility: hidden;
+    border: 1px solid rgb(242, 242, 242);
+  }
+
+  .cell-data img {
+    border-radius: 25%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+  }
+
+  .avatar {
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 960px) {
+    .fake-table {
+      display: block;
+      padding: 0px;
+      border: initial;
+    }
+
+    .header-row {
+      display: none;
+    }
+
+    .data-row {
+      display: table;
+      margin: auto;
+      width: 100%;
+    }
+
+    .data-row:nth-of-type(odd) {
+      background-color: initial;
+    }
+
+    .data-row:nth-of-type(1n-1) {
+      margin-top: 8px;
+    }
+
+    .data-row:nth-of-type(2) {
+      margin-top: 0px;
+    }
+
+    .data-row .data-cell {
+      display: table-row;
+    }
+
+    .data-row .data-cell .cell-header {
+      display: table-cell;
+      visibility: visible;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      width: 50%;
+      font-weight: bold;
+    }
+
+    .data-row .data-cell .cell-data {
+      display: table-cell;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      vertical-align: middle;
+    }
+
+    .data-row:nth-of-type(odd) .data-cell .cell-header {
+      display: table-cell;
+      visibility: visible;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      width: 50%;
+      font-weight: bold;
+      background-color: white;
+    }
+
+    .data-row:nth-of-type(odd) .data-cell .cell-data {
+      display: table-cell;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      vertical-align: middle;
+      background-color: white;
+    }
+
+    .avatar {
+      text-align: left;
+    }
+  }
+
+  /* Fake Table End */

@@ -1,0 +1,271 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  <%=title%>
+</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="<%=baseUrl%>/stylesheets/styles.css">
+<link rel="stylesheet" href="<%=baseUrl%>/stylesheets/card.css">
+<link rel="stylesheet" href="<%=baseUrl%>/stylesheets/pagination.css">
+<script defer src="/javascripts/forms/deletePetHandler.js"></script>
+<style>
+  #welcome {
+    margin: auto;
+  }
+
+  /* Fake Table Begin */
+  .fake-table {
+    display: table;
+    width: 100%;
+    border: 1px solid rgb(242, 242, 242);
+    border-collapse: collapse;
+  }
+
+  /* .header-row .header-cell {
+    background-color: rgb(255, 248, 234);
+  } */
+
+  .header-row,
+  .data-row {
+    display: table-row;
+    border: 1px solid lightgrey;
+  }
+
+  .data-row {
+    vertical-align: baseline;
+  }
+
+  .data-row:nth-of-type(even) {
+    background-color: rgb(242, 242, 242);
+  }
+
+  .data-row:nth-of-type(odd) {
+    background-color: white;
+  }
+
+  .header-cell,
+  .data-cell {
+    display: table-cell;
+    border: 1px solid rgb(242, 242, 242);
+    padding: 4px;
+    vertical-align: middle;
+  }
+
+  /* #hc1,
+  #hc2,
+  #hc3 {
+    width: 19.444%;
+  }
+
+  #hc4,
+  #hc5 {
+    width: 20.833%;
+  } */
+
+  .header-cell {
+    font-weight: bold;
+  }
+
+  .cell-header {
+    display: none;
+    visibility: hidden;
+    border: 1px solid rgb(242, 242, 242);
+  }
+
+  .cell-data img {
+    border-radius: 25%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+  }
+
+  .avatar {
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 960px) {
+    .fake-table {
+      display: block;
+      padding: 0px;
+      border: initial;
+    }
+
+    .header-row {
+      display: none;
+    }
+
+    .data-row {
+      display: table;
+      margin: auto;
+      width: 100%;
+    }
+
+    .data-row:nth-of-type(odd) {
+      background-color: initial;
+    }
+
+    .data-row:nth-of-type(1n-1) {
+      margin-top: 8px;
+    }
+
+    .data-row:nth-of-type(2) {
+      margin-top: 0px;
+    }
+
+    .data-row .data-cell {
+      display: table-row;
+    }
+
+    .data-row .data-cell .cell-header {
+      display: table-cell;
+      visibility: visible;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      width: 50%;
+      font-weight: bold;
+    }
+
+    .data-row .data-cell .cell-data {
+      display: table-cell;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      vertical-align: middle;
+    }
+
+    .data-row:nth-of-type(odd) .data-cell .cell-header {
+      display: table-cell;
+      visibility: visible;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      width: 50%;
+      font-weight: bold;
+      background-color: white;
+    }
+
+    .data-row:nth-of-type(odd) .data-cell .cell-data {
+      display: table-cell;
+      border: 1px solid lightgrey;
+      padding: 4px;
+      min-width: 120px;
+      vertical-align: middle;
+      background-color: white;
+    }
+
+    .avatar {
+      text-align: left;
+    }
+  }
+
+  /* Fake Table End */
+
+  section {
+    padding: 10px;
+  }
+</style>
+</head>
+
+<body>
+  <% function camelCaseToNormal(text) { return text.replace(/([A-Z])/g, ' $1' ).replace(/^./, function(str){ return
+    str.toUpperCase(); }).trim(); } %>
+    <div id="container">
+      <%- include('_header.ejs') %>
+        <main>
+          <section>
+          <% if (pets.length > 0) { %>
+
+            <div class="pagination-wrapper">
+              <nav class="pagination">
+                <ul>
+                  <li><a href="/pets/my-pets/1">First</a></li>
+                  <li><a href="/pets/my-pets/<%=pageInfo.prevPage%>">Previous</a></li>
+                  <% for(let i=pageInfo.leftEdge; i <=pageInfo.rightEdge; i++) { %>
+                    <li><a href="/pets/my-pets/<%=i%>" <%=pageInfo.currentPage == i ? 'class=active' : ''%>>
+                        <%=i%>
+                      </a></li>
+                    <% } %>
+                      <li><a href="/pets/my-pets/<%=pageInfo.nextPage%>">Next</a></li>
+                      <li><a href="/pets/my-pets/<%=pageInfo.totalPages%>">Last</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <ul id="petList"  class="card-list">
+              <% pets.forEach(function(pet) { %>
+                <li id="pet-<%= pet._id %>" class="card-item">
+
+                  <div class="card-item-inner">
+
+                    <div class="card-image-outer">
+                      <% if (pet.image) { %>
+                        <a href="/uploads/pets/originals/<%= pet.image %>">
+                          <img class="card-img" src="/uploads/pets/originals/<%= pet.image %>" alt="<%= pet.name %>">
+                        </a>
+                        <% } %>
+                    </div>
+                    <div class="card-content">
+                      <div class="card-title">
+                        Name: <%= pet.name %><br>
+                        Age: <%= pet.petAge %> years
+                      </div>
+                      <p class="card-paragraph ">
+                        <%= pet.description %>
+                      </p>
+                      <button class="card-button delete-pet" data-id="<%= pet._id %>">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+
+
+
+                  <!-- <h2>
+                    <%= pet.name %> (<%= pet.petType %>)
+                  </h2>
+                  <p>Age: <%= pet.petAge %> years</p>
+                  <p>Description: <%= pet.description %>
+                  </p>
+                  <% if (pet.image) { %>
+                    <a href="/uploads/pets/originals/<%= pet.image %>">
+                      <img src="/uploads/pets/originals/<%= pet.image %>" alt="<%= pet.name %>">
+                    </a>
+                  <% } %>
+                  <p>
+                    <button class="delete-pet" data-id="<%= pet._id %>">Delete</button>
+                  </p> -->
+
+
+                </li>
+                <% }) %>
+            </ul>
+            <p id="message"></p>
+
+            <div class="pagination-wrapper">
+              <nav class="pagination">
+                <ul>
+                  <li><a href="/pets/my-pets/1">First</a></li>
+                  <li><a href="/pets/my-pets/<%=pageInfo.prevPage%>">Previous</a></li>
+                  <% for(let i=pageInfo.leftEdge; i <=pageInfo.rightEdge; i++) { %>
+                    <li><a href="/pets/my-pets/<%=i%>" <%=pageInfo.currentPage == i ? 'class=active' : ''%>>
+                        <%=i%>
+                      </a></li>
+                    <% } %>
+                      <li><a href="/pets/my-pets/<%=pageInfo.nextPage%>">Next</a></li>
+                      <li><a href="/pets/my-pets/<%=pageInfo.totalPages%>">Last</a></li>
+                </ul>
+              </nav>
+            </div>
+
+          <% } %>
+          </section>
+        </main>
+        <%- include('_footer.ejs') %>
+    </div>
+</body>
+
+</html>

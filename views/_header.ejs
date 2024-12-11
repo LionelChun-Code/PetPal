@@ -1,0 +1,28 @@
+<header>
+    <a id="logo" href="">
+        PetPal
+    </a>
+    <input type="checkbox" id="nav-check" hidden>
+    <nav id="main-nav">
+        <ul id="top-menus">
+            <li><a href="<%=baseUrl%>/" target="_self" rel="noopener noreferrer">Home</a></li>
+            <li><a href="<%=baseUrl%>/pets">Pets</a></li>
+            <% if (!(session.user)) { %>
+                <li><a href="<%=baseUrl%>/users">Users</a></li>
+                <li><a href="<%=baseUrl%>/auth/signin" target="_self" rel="noopener noreferrer">Signin</a></li>
+                <li><a href="<%=baseUrl%>/auth/signup" target="_self" rel="noopener noreferrer">Signup</a></li>
+                
+            <% } else { %>
+                <li><a href="<%=baseUrl%>/users">Users</a></li>
+                <li><a href="<%=baseUrl%>/users/dashboard" target="_self" rel="noopener noreferrer">Dashboard</a></li>
+                <li><a href="<%=baseUrl%>/auth/signout" target="_self" rel="noopener noreferrer">Signout</a></li>
+            <% } %>
+            <li><a href="<%=baseUrl%>/contact" target="_self" rel="noopener noreferrer">Contact</a></li>
+        </ul>
+    </nav>
+    <label for="nav-check" id="toggle-menus">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+</header>

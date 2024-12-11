@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=title%>
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link rel="stylesheet" href="/stylesheets/pagination.css">
+  <link rel="stylesheet" href="/stylesheets/sign-form.css">
+  <link rel="stylesheet" href="/stylesheets/fake-table.css">
+  <script defer src="/javascripts/forms/manageUsersHandler.js"></script> <!-- 引用管理員腳本 -->
+
+  <style>
+    #sign-block {
+      text-align: center;
+      min-width: 80%;
+      margin: 0 auto;
+    }
+
+    #userList > li {
+      margin: 20px 0;
+    }
+
+    .data-row {
+      height: 100px;
+    }
+
+    .message {
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <% function camelCaseToNormal(text) { 
+    return text.replace(/([A-Z])/g, ' $1' ).replace(/^./, function(str){ 
+      return str.toUpperCase(); }).trim(); } %>
+  <div id="container">
+    <%- include('_header.ejs') %>
+      <main>
+        <section>
+          <% if (users.length> 0) { %>
+            <div class="pagination-wrapper">
+              <nav class="pagination">
+                <ul>
+                  <li><a href="/users/manageusers/1">First</a></li>
+                  <li><a href="/users/manageusers/<%=pageInfo.prevPage%>">Previous</a></li>
+                  <% for(let i=pageInfo.leftEdge; i <=pageInfo.rightEdge; i++) { %>
+                    <li><a href="/users/manageusers/<%=i%>">
+                        <%=i%>
+                      </a></li>
+                    <% } %>
+                      <li><a href="/users/manageusers/<%=pageInfo.nextPage%>">Next</a></li>
+                      <li><a href="/users/manageusers/<%=pageInfo.totalPages%>">Last</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div id="userList" class="fake-table">
+              <div class="header-row">
+                <% let skipFields=['_id', 'password' , 'createdAt', 'updatedAt' , '__v' ]; let count=0; for (const [key, value] of
+                  Object.entries(users[0])) { if (skipFields.includes(key)) { continue; } count++; %>
+                  <div class="header-cell" id="hc<%=count%>">
+                    <%=camelCaseToNormal(key)%>
+                  </div>
+                <% } %>
+                  <div class="header-cell">
+                    Message of Setting
+                  </div>
+                  <div class="header-cell">
+                    Set Active
+                  </div>
+                  <div class="header-cell">
+                    Set Role
+                  </div>
+              </div>
+              <% for (const [dim1key, dim1value] of Object.entries(users)) { %>
+                <div class="data-row"  id="user-<%= dim1value._id %>">
+                  <% for (const [dim2key, dim2value] of Object.entries(dim1value)) { 
+                    if (skipFields.includes(dim2key)) { continue; } %>
+                    <div class="data-cell">
+                      <div class="cell-header">
+                        <%=camelCaseToNormal(dim2key)%>
+                      </div>
+                      <% if (dim2key=='avatar' ) { %>
+                        <div class="cell-data <%=dim2key%>">
+                          <img
+                            src="<%= (dim2value && dim2value.trim() !== '' && dim2value !== 'default-avatar.png') ? `/uploads/avatars/thumbnails/${dim2value}` : '/images/default-avatar.png' %>"
+                            width="100px" alt="User Avatar">
+                        </div>
+                        <% } else { %>
+                          <div class="cell-data text <%= dim2key=='isActivated' ? 'activation-status ' : '' %><%= dim2key=='role' ? 'role-status ' : '' %>">
+                            <%=dim2value%>
+                          </div>
+                        <% } %>
+                    </div>
+                  <% } %>
+                    <div class="data-cell">
+                      <div class="cell-header">
+                        Message of Setting
+                      </div>
+                      <div class="cell-data message" style="word-break: break-word; max-width: 210px;">
+                        
+                      </div>
+                    </div>
+                    <div class="data-cell">
+                      <div class="cell-header">
+                        Set Active
+                      </div>
+                      <div class="cell-data">
+                        <button class="activate-user" data-id="<%= dim1value._id %>" <%=dim1value.isActivated ? 'disabled' : ''
+                          %>>Activate</button>
+                        <button class="deactivate-user" data-id="<%= dim1value._id %>" <%=dim1value.isActivated ? '' : 'disabled'
+                          %>>Deactivate</button>
+                          
+                      </div>
+                    </div>
+                    <div class="data-cell">
+                      <div class="cell-header">
+                        Set Role
+                      </div>
+                      <div class="cell-data">
+                        <select class="change-role" data-id="<%= dim1value._id %>">
+                          <option value="User" <%=dim1value.role==='User' ? 'selected' : '' %>>User</option>
+                          <option value="Admin" <%=dim1value.role==='Admin' ? 'selected' : '' %>>Admin</option>
+                          <option value="Super Admin" <%=dim1value.role==='Super Admin' ? 'selected' : '' %>>Super Admin</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+              <% } %>
+            </div>
+            <div class="pagination-wrapper">
+              <nav class="pagination">
+                <ul>
+                  <li><a href="/users/manageusers/1">First</a></li>
+                  <li><a href="/users/manageusers/<%=pageInfo.prevPage%>">Previous</a></li>
+                  <% for(let i=pageInfo.leftEdge; i <=pageInfo.rightEdge; i++) { %>
+                    <li><a href="/users/manageusers/<%=i%>">
+                        <%=i%>
+                      </a></li>
+                    <% } %>
+                      <li><a href="/users/manageusers/<%=pageInfo.nextPage%>">Next</a></li>
+                      <li><a href="/users/manageusers/<%=pageInfo.totalPages%>">Last</a></li>
+                </ul>
+              </nav>
+            </div>
+            <% } %>
+        </section>
+      </main>
+      <%- include('_footer.ejs') %>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+.pagination-wrapper {
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-top: 0;
+    position: relative;
+  }
+
+  .pagination {
+    display: inline-flex;
+    justify-content: center;
+    padding: 1em;
+    flex-wrap: nowrap;
+    position: sticky;
+    top: 0;
+  }
+
+  .pagination ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+  }
+
+  .pagination li {
+    margin: 0 5px;
+  }
+
+  .pagination a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #28a745;
+    /* 綠色系 */
+    border-radius: 4px;
+  }
+
+  .pagination a:hover {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+  }
+
+  .pagination a.active {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+  }

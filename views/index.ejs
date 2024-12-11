@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=title%>
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="./stylesheets/styles.css">
+  <link rel="stylesheet" href="./stylesheets/card.css">
+</head>
+
+<body>
+  <div id="container">
+    <%- include('_header.ejs') %>
+      <main>
+        <section>
+          <div id="banner">
+            <img src="images/HomeBanner.png" alt="banner">
+          </div>
+        </section>
+        <section>
+          <ul class="card-list">
+            <li class="card-item">
+              <div class="card-item-inner">
+                <div class="card-image-outer"><img class="card-img" src="images/cat.jpg" alt=""></div>
+                <div class="card-content">
+                  <div class="card-title">Cat</div>
+                  <p class="card-paragraph ">The cat (Felis catus), commonly referred to as the domestic cat or house
+                    cat, is the only domesticated species in the family Felidae.</p>
+                  <button class="card-button"><a href="/pets/1/cat">Cat</a></button>
+                </div>
+              </div>
+            </li>
+            <li class="card-item">
+              <div class="card-item-inner">
+                <div class="card-image-outer"><img class="card-img" src="images/dog.jpg" alt=""></div>
+                <div class="card-content">
+                  <div class="card-title">Dog</div>
+                  <p class="card-paragraph ">The dog (Canis familiaris or Canis lupus familiaris) is a domesticated
+                    descendant of the wolf. Also called the domestic dog, it is derived from extinct Pleistocene
+                    wolves, and the modern wolf is the dog's nearest living relative.</p>
+                  <button class="card-button"><a href="/pets/1/dog">Dog</a></button>
+                </div>
+              </div>
+            </li>
+            <li class="card-item">
+              <div class="card-item-inner">
+                <div class="card-image-outer"><img class="card-img" src="images/parrot.jpg" alt=""></div>
+                <div class="card-content">
+                  <div class="card-title">Parrot</div>
+                  <p class="card-paragraph ">Parrots (Psittaciformes), also known as psittacines, are birds with a
+                    strong curved beak, upright stance, and clawed feet.</p>
+                  <button class="card-button"><a href="/pets/1/parrot">Parrot</a></button>
+                </div>
+              </div>
+            </li>
+            <li class="card-item">
+              <div class="card-item-inner">
+                <div class="card-image-outer"><img class="card-img" src="images/rabbit.jpg" alt=""></div>
+                <div class="card-content">
+                  <div class="card-title">Rabbit</div>
+                  <p class="card-paragraph ">Rabbits, also known as bunnies or bunny rabbits, are small mammals in the
+                    family Leporidae (which also contains the hares) of the order Lagomorpha (which also
+                    contains the pikas).</p>
+                  <button class="card-button"><a href="/pets/1/rabbit">Rabbit</a></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <%- include('_footer.ejs') %>
+  </div>
+</body>
+
+</html>

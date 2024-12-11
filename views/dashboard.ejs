@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=title%>
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link rel="stylesheet" href="/stylesheets/sign-form.css">
+  <!-- <script defer src="/javascripts/forms/signinFormHandler.js"></script> -->
+  <style>
+    #sign-block nav {
+      text-align: center;
+      padding: 20px;
+      margin: 20px;
+    }
+
+    span {
+      font-size: 20px;
+      display: block;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    #sign-block li a {
+      display: inline-block;
+      width: 200px;
+      margin: 2px;
+      background-color: rgb(242, 242, 242);
+      border-radius: 4px;
+      color: black;
+      text-decoration: none;
+    }
+
+    #sign-block li #manage {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <%- include('_header.ejs') %>
+      <main>
+        <section>
+          <div id="sign-block">
+            <span>Role: <%= session.user.role %></span>
+            <span>
+              <%= session.user.username %>
+            </span>
+            <nav>
+              <ul>
+                <% if ( session.user.role.toUpperCase()==='Super Admin' .toUpperCase() ||
+                  session.user.role.toUpperCase()==='Admin' .toUpperCase() ) { %>
+                  <li><a id="manage" href="/users/manageUsers">Manage Users</a></li> <!-- 管理員儀表板連結 -->
+                  <% } %>
+                    <li><a href="/users/profile">Profile</a></li>
+                    <li><a href="/users/settings">Settings</a></li>
+                    <li><a href="/pets/add-pet">Add a Pet</a></li>
+                    <li><a href="/pets/my-pets">My Pets</a></li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+      </main>
+      <%- include('_footer.ejs') %>
+  </div>
+</body>
+
+</html>

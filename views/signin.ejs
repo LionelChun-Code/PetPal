@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%=title%>
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/sign-form.css">
+    <script defer src="/javascripts/forms/signinFormHandler.js"></script>
+
+    <style>
+        #sign-block>p {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <%- include('_header.ejs') %>
+            <main>
+                <div id="sign-block">
+                    <h1>SIGNIN</h1>
+                    <p>Sign In to Your Account</p>
+                    <form id="signinForm">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <br>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        <br>
+                        <button type="submit">Sign In</button>
+                        <p id="message"></p>
+                    </form>
+                </div>
+            </main>
+            <%- include('_footer.ejs') %>
+    </div>
+</body>
+
+</html>
