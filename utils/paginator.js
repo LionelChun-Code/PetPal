@@ -16,6 +16,7 @@ class Paginator {
     #rightEdge;
 	#fillRows;
 
+
     constructor(rows, currentPageNumber = 1, rowsPerPage = 10, range = 4) {
         this.#rows = rows;
         this.#rowsPerPage = rowsPerPage;
@@ -36,6 +37,7 @@ class Paginator {
         this.#genFillRows();
     }
 
+
     #genMaxBoundaryRange(range) {
         
         this.#maxBoundaryRange = range;
@@ -55,6 +57,7 @@ class Paginator {
             this.#endPage = this.#currentPageNumber + this.#maxBoundaryRange <= this.#totalPages ? this.#currentPageNumber + this.#maxBoundaryRange : this.#totalPages;
         }
     }
+
 
     #genEdge() {
 
@@ -81,6 +84,7 @@ class Paginator {
         }
     }
 
+
     #genFillRows() {
         if (this.#endRow < this.#currentPageNumber * this.#rowsPerPage) {
             this.#fillRows = this.#currentPageNumber * this.#rowsPerPage - this.#endRow;
@@ -89,8 +93,9 @@ class Paginator {
         }
     }
 
-    getInfo() {
 
+    getInfo() {
+        // startPage - endPage 與 leftEdge - rightEdge 為不同的分頁效果，可選任一組合為for loop的起止條件。
         return {
             'rows': this.#rows,
             'rowsPerPage' : this.#rowsPerPage,
@@ -109,8 +114,7 @@ class Paginator {
             'fillRows' : this.#fillRows
         };
     }
+
 }
 
 module.exports = Paginator;
-
-// startPage - endPage 與 leftEdge - rightEdge 為不同的分頁效果，可選任一組合為for loop的起止條件。

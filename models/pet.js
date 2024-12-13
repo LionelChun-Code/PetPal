@@ -42,7 +42,6 @@ const petSchema = new Schema({
   }
 });
 
-// 在保存之前更新 `updatedAt` 字段
 petSchema.pre('save', function (next) {
   this.updatedAt = Date.now();
   next();

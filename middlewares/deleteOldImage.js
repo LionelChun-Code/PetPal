@@ -1,8 +1,8 @@
-const fs = require('fs').promises; // 使用 promise 版本的 fs 模塊
+const fs = require('fs').promises;
 const path = require('path');
-const User = require('../models/user'); // 引入 User 模型
+const User = require('../models/user');
 
-// 中間件函數，用於刪除舊圖片
+
 function deleteOldImage(originalPath, thumbnailPath) {
   return async function (req, res, next) {
     try {
@@ -17,11 +17,9 @@ function deleteOldImage(originalPath, thumbnailPath) {
         const originalImagePath = path.join(__dirname, '../', originalPath, user.avatar);
         const thumbnailImagePath = path.join(__dirname, '../', thumbnailPath, user.avatar);
 
-        // 日誌檢查文件路徑
         console.log('Original Image Path:', originalImagePath);
         console.log('Thumbnail Image Path:', thumbnailImagePath);
 
-        // 刪除文件的函數
         const deleteFile = async (filePath, type) => {
           try {
             await fs.unlink(filePath);
@@ -34,8 +32,7 @@ function deleteOldImage(originalPath, thumbnailPath) {
             }
           }
         };
-
-        // 刪除原始圖片和縮略圖
+        
         await deleteFile(originalImagePath, 'original');
         await deleteFile(thumbnailImagePath, 'thumbnail');
       }

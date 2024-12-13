@@ -1,5 +1,6 @@
 const { body } = require('express-validator');
 
+
 const checkSignup = [
   body('email').isEmail().withMessage('Please provide a valid email address'),
   body('confirm_password').custom((value, { req }) => {

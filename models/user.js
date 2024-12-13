@@ -38,9 +38,7 @@ const userSchema = new mongoose.Schema({
   },
   isDormant: {
     type: Boolean,
-    default: false,
-    // Indicates if the user has chosen to go dormant. Default is false.
-    // 指示用戶是否選擇進入休眠狀態。默認值為 false
+    default: false
   },
   createdAt: {
     type: Date,
@@ -53,14 +51,11 @@ const userSchema = new mongoose.Schema({
 });
 
 // Set middleware to update the updatedAt field before saving
-// 設置中間件在保存時更新 updatedAt 
 userSchema.pre('save', function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
-// Create and export the User model
-// 創建並導出 User 模型
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
