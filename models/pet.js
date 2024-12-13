@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// 定義寵物模型
+
 const petSchema = new Schema({
   name: {
     type: String,
@@ -29,7 +29,7 @@ const petSchema = new Schema({
     maxlength: [500, 'Description cannot be more than 500 characters']
   },
   image: {
-    type: String, // 圖片文件名
+    type: String,
     required: [true, 'Pet image is required']
   },
   createdAt: {

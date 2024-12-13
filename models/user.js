@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 // Define User schema
-// 定義 User 模式
 const userSchema = new mongoose.Schema({
-  // 其他字段
+  
   username: {
     type: String,
     required: [true, 'Username is required'],
