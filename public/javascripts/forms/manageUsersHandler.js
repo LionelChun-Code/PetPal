@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
   userList.addEventListener('click', async function (e) {
     if (e.target.classList.contains('deactivate-user')) {
       const userId = e.target.dataset.id;
-      //const messageElement = document.getElementById('message');
-      //const messageElement = document.getElementById(`user-${userId}`).querySelector('.message');
       const userElement = document.getElementById(`user-${userId}`);
       const messageElement = userElement.querySelector('.message');
+      
       try {
         const response = await fetch(`/users/deactivate/${userId}`, {
           method: 'PUT'
@@ -33,8 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (e.target.classList.contains('activate-user')) {
       const userId = e.target.dataset.id;
-      // const messageElement = document.getElementById('message');
-      // const messageElement = document.getElementById(`user-${userId}`).querySelector('.message');
       const userElement = document.getElementById(`user-${userId}`);
       const messageElement = userElement.querySelector('.message');
       try {
@@ -65,8 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.target.classList.contains('change-role')) {
       const userId = e.target.dataset.id;
       const role = e.target.value;
-      //const messageElement = document.getElementById('message');
-      // const messageElement = document.getElementById(`user-${userId}`).querySelector('.message');
       const userElement = document.getElementById(`user-${userId}`);
       const messageElement = userElement.querySelector('.message');
 

@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const password = document.getElementById('password').value;
     const confirm_password = document.getElementById('confirm_password').value;
     const messageElement = document.getElementById('message');
-
-    // 簡單的客戶端驗證
+    
     if (password !== confirm_password) {
       messageElement.innerText = 'Passwords do not match';
       return;

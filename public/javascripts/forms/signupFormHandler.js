@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const password = document.getElementById('password').value;
     const confirm_password = document.getElementById('confirm_password').value;
     const messageElement = document.getElementById('message');
-
-    // 簡單的客戶端驗證
+    
     if (password !== confirm_password) {
       messageElement.innerText = 'Passwords do not match.';
       return;
@@ -28,9 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (result.success) {
         alert(result.success);
-        window.location.href = result.redirectUrl; // 重定向到 dashboard
+        window.location.href = result.redirectUrl;
       } else if (result.errors) {
-        // 處理後端返回的驗證錯誤
         messageElement.innerText = result.errors.map(error => error.msg).join(', ');
       } else if (result.error) {
         messageElement.innerText = result.error;
